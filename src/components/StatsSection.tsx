@@ -29,23 +29,33 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="py-16 border-y border-border/50">
+    <section className="py-20 relative">
+      {/* Top border gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      
       <div className="container">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat) => (
-            <div key={stat.label} className="stat-card group">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                <stat.icon className="w-6 h-6 text-primary" />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          {stats.map((stat, i) => (
+            <div 
+              key={stat.label} 
+              className="stat-card group animate-fade-up"
+              style={{ animationDelay: `${i * 100}ms` }}
+            >
+              <div className="icon-container mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <stat.icon className="w-7 h-7 text-primary" />
               </div>
-              <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">
+              <div className="number-highlight mb-3">
                 {stat.value}
               </div>
-              <div className="font-semibold text-foreground mb-1">{stat.label}</div>
-              <div className="text-xs text-muted-foreground">{stat.description}</div>
+              <div className="font-bold text-foreground text-lg mb-2">{stat.label}</div>
+              <div className="text-sm text-muted-foreground">{stat.description}</div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Bottom border gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
     </section>
   );
 };
